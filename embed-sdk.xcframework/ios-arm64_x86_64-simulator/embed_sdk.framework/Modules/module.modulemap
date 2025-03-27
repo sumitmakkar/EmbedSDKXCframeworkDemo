@@ -1,6 +1,0 @@
-framework module embed_sdk {
-  umbrella header "embed_sdk.h"
-  export *
-
-  module * { export * }
-}
