@@ -1,0 +1,8 @@
+{
+  "version": "SDK_VERSION_PLACEHOLDER",
+  "base": {
+    "EDITOR": "https://new.express.adobe.com",
+    "QUICK_ACTION": "https://quick-actions.projectx.corp.adobe.com",
+    "FIREFLY": "https://firefly.adobe.com"
+  }
+}

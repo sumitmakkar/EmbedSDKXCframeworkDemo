@@ -1,0 +1,8 @@
+{
+  "version": "SDK_VERSION_PLACEHOLDER",
+  "base": {
+    "EDITOR": "https://pre-prod.projectx.corp.adobe.com",
+    "QUICK_ACTION": "https://quick-actions-pre-prod.projectx.corp.adobe.com",
+    "FIREFLY": "https://firefly.corp.adobe.com"
+  }
+}
