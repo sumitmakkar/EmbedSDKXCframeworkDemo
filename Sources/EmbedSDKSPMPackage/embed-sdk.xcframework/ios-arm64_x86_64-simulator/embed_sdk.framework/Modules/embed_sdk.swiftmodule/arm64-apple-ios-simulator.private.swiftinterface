@@ -1,0 +1,851 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+// swift-module-flags: -target arm64-apple-ios17.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name embed_sdk
+import Foundation
+import Swift
+import UIKit
+import WebKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_exported import embed_sdk
+public enum State {
+  case NOT_INITIALIZED
+  case INITIALIZING
+  case INITIALIZED
+  public static func == (a: embed_sdk.State, b: embed_sdk.State) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum AuthOption : Swift.Codable {
+  case UpfrontAuthOption(embed_sdk.UpfrontAuthOption)
+  case DelayedAuthOption(embed_sdk.DelayedAuthOption)
+  case ImsJumpAuthOption(embed_sdk.ImsJumpAuthOption)
+  case PreSignedInAuthOption(embed_sdk.PreSignedInAuthOption)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class CCEverywhereError : Swift.Error {
+  public var code: Swift.String?
+  public var message: Swift.String
+  public var subError: embed_sdk.CCEverywhereError?
+  public static func create(error: embed_sdk.ErrorCodeMessages) -> embed_sdk.CCEverywhereError
+  @objc deinit
+}
+public struct Version : Swift.Equatable, Swift.Codable {
+  public init(major: Swift.String?, minor: Swift.String?, patch: Swift.String? = nil)
+  public static func == (a: embed_sdk.Version, b: embed_sdk.Version) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum Environment : Swift.String, Swift.Codable {
+  case DEV
+  case STAGE
+  case PREPROD
+  case PRODUCTION
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class ActionManager {
+  @objc deinit
+}
+public enum ColorTheme : Swift.String, Swift.Codable {
+  case LIGHTEST
+  case LIGHT
+  case DARK
+  case DARKEST
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum SpectrumTheme : Swift.String, Swift.Codable {
+  case SPECTRUM
+  case EXPRESS
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class UpfrontAuthOption : Swift.Codable {
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class DelayedAuthOption : Swift.Codable {
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class PreSignedInAuthOption : Swift.Codable {
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class ImsJumpAuthOption : Swift.Codable {
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public enum FileType : Swift.Codable {
+  case IMAGE_FILE_TYPE(embed_sdk.ImageFileType)
+  case VIDEO_FILE_TYPE(embed_sdk.VideoFileType)
+  case PDF_FILE_TYPE(embed_sdk.PdfFileType)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum ImageFileType : Swift.String, Swift.Codable {
+  case JPEG
+  case PNG
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum VideoFileType : Swift.String, Swift.Codable {
+  case MP4
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum PdfFileType : Swift.String, Swift.Codable {
+  case PDF
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum SizeUnit : Swift.String, Swift.Codable {
+  case PIXELS
+  case MILLIMETERS
+  case INCHES
+  case CENTIMETERS
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol Size : Swift.Decodable, Swift.Encodable {
+  var width: Swift.Float { get set }
+  var height: Swift.Float { get set }
+  var unit: embed_sdk.SizeUnit { get set }
+}
+public struct PixelSize : embed_sdk.Size, Swift.Codable {
+  public var width: Swift.Float
+  public var height: Swift.Float
+  public var unit: embed_sdk.SizeUnit
+  public init(width: Swift.Float, height: Swift.Float, unit: embed_sdk.SizeUnit = SizeUnit.PIXELS)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum AssetType : Swift.String, Swift.Codable {
+  case IMAGE
+  case VIDEO
+  case PDF
+  case PSD
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum AssetDataType : Swift.String, Swift.Codable {
+  case BASE64
+  case URL
+  case BLOB
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct Blob : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum DataTypeMap : Swift.Codable {
+  case blob(embed_sdk.Blob)
+  case url(Swift.String)
+  case base64(Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol AssetBase : Swift.Decodable, Swift.Encodable {
+  var type: embed_sdk.AssetType { get set }
+  var name: Swift.String? { get set }
+  var dataType: embed_sdk.AssetDataType { get set }
+  var data: embed_sdk.DataTypeMap { get set }
+}
+public struct OutputAsset : embed_sdk.AssetBase, Swift.Codable {
+  public var fileType: embed_sdk.FileType
+  public var fileName: Swift.String
+  public var size: embed_sdk.PixelSize?
+  public var type: embed_sdk.AssetType
+  public var name: Swift.String?
+  public var dataType: embed_sdk.AssetDataType
+  public var data: embed_sdk.DataTypeMap
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum AspectRatio : Swift.String, Swift.Codable {
+  case SQUARE
+  case PORTRAIT
+  case LANDSCAPE
+  case WIDESCREEN
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct ImageDimensions : Swift.Codable {
+  public init(size: embed_sdk.PixelSize, aspectRatio: embed_sdk.AspectRatio)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public class Asset : Swift.Codable {
+  public init(type: embed_sdk.AssetType, name: Swift.String? = nil, dataType: embed_sdk.AssetDataType, data: embed_sdk.DataTypeMap)
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class Base64Asset : embed_sdk.Asset {
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class UrlAsset : embed_sdk.Asset {
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class BlobAsset : embed_sdk.Asset {
+  required public init(from decoder: any Swift.Decoder) throws
+  @objc deinit
+}
+public protocol ModuleWorkflowInterface {
+  func createImageFromText(appConfig: embed_sdk.TextToImageAppConfig, exportConfig: embed_sdk.ExportConfig, containerConfig: any embed_sdk.ContainerConfiguration, view: UIKit.UIView) throws
+}
+public class ConfigParamsBase : Swift.Codable {
+  public init(locale: Swift.String?, skipBrowserSupportCheck: Swift.Bool?, env: embed_sdk.Environment? = Environment.PRODUCTION)
+  required public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class CCEverywhere : embed_sdk.CCEverywhereBase, embed_sdk.CCEverywhereInterface {
+  public var module: any embed_sdk.ModuleWorkflowInterface {
+    get
+  }
+  public func close()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class EmbedSdk {
+  public static func initialize(hostInfo: embed_sdk.HostInfo, configParams: embed_sdk.ConfigParams? = nil, authOption: embed_sdk.AuthOption? = nil) throws -> any embed_sdk.CCEverywhereInterface
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class AuthProvider {
+  @objc deinit
+}
+public enum HostId : Swift.String, Swift.Codable {
+  case OTHER
+  case ACROBAT
+  case ACROBAT_EXT
+  case ADOBE_HOME
+  case CCD
+  case CONTENT_CAL
+  case STOCK
+  case AEM_ASSETS
+  case AEM_ASSETS_CONTENT_HUB
+  case A_DOT_COM
+  case BRIDGE
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum HostType : Swift.String, Swift.Codable {
+  case THIRD_PARTY
+  case FIRST_PARTY
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public class HostInfoSpecifiedBase : Swift.Codable {
+  public init(clientId: Swift.String?, appName: Swift.String?, appVersion: embed_sdk.Version?, platformCategory: embed_sdk.PlatformCategory? = nil)
+  required public init(from decoder: any Swift.Decoder) throws
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+extension embed_sdk.HostInfoSpecifiedBase : Swift.Equatable {
+  public static func == (lhs: embed_sdk.HostInfoSpecifiedBase, rhs: embed_sdk.HostInfoSpecifiedBase) -> Swift.Bool
+}
+public enum PlatformCategory : Swift.String, Swift.Equatable, Swift.Codable {
+  case WEB
+  case DESKTOP
+  case MOBILE
+  case INVALID_PLATFORM
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@_inheritsConvenienceInitializers public class HostInfo : embed_sdk.HostInfoSpecifiedBase {
+  override public init(clientId: Swift.String?, appName: Swift.String?, appVersion: embed_sdk.Version?, platformCategory: embed_sdk.PlatformCategory? = nil)
+  required public init(from decoder: any Swift.Decoder) throws
+  @objc deinit
+}
+public protocol HostInfoComputed {
+  var referer: Swift.String? { get set }
+  var isFirstPartyHost: Swift.Bool? { get set }
+  var type: embed_sdk.HostType? { get set }
+  var id: embed_sdk.HostId? { get set }
+}
+@_hasMissingDesignatedInitializers public class HostInfoSession : Swift.Codable {
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class HostInfoExtended : embed_sdk.HostInfoSpecifiedBase, embed_sdk.HostInfoComputed {
+  public var referer: Swift.String?
+  public var isFirstPartyHost: Swift.Bool?
+  public var type: embed_sdk.HostType?
+  public var id: embed_sdk.HostId?
+  public init(clientId: Swift.String?, appName: Swift.String?, appVersion: embed_sdk.Version?, platformCategory: embed_sdk.PlatformCategory? = nil, referer: Swift.String?, isFirstPartyHost: Swift.Bool?, type: embed_sdk.HostType?, id: embed_sdk.HostId?)
+  public init(hostInfoComputed: any embed_sdk.HostInfoComputed, hostInfoSpecifiedBase: embed_sdk.HostInfoSpecifiedBase)
+  required public init(from decoder: any Swift.Decoder) throws
+  override public func encode(to encoder: any Swift.Encoder) throws
+  @objc deinit
+}
+@_inheritsConvenienceInitializers public class ConfigParams : embed_sdk.ConfigParamsBase {
+  override public init(locale: Swift.String?, skipBrowserSupportCheck: Swift.Bool?, env: embed_sdk.Environment? = Environment.PRODUCTION)
+  required public init(from decoder: any Swift.Decoder) throws
+  @objc deinit
+}
+public enum FeatureFlagsValue : Swift.Codable {
+  case STRING(Swift.String)
+  case NUMBER(Swift.Int)
+  case BOOLEAN(Swift.Bool)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class FeatureFlags : Swift.Codable {
+  public var FeatureFlags: [Swift.String : embed_sdk.FeatureFlagsValue]
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class BaseWorkflow {
+  public init(actionManager: embed_sdk.ActionManager, context: embed_sdk.SDKContext)
+  @objc deinit
+}
+public protocol CCEverywhereInterface {
+  var module: any embed_sdk.ModuleWorkflowInterface { get }
+  func close()
+}
+@_hasMissingDesignatedInitializers public class SDKContext {
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class CCEverywhereBase {
+  @objc deinit
+}
+public enum MessageType : Swift.String, Swift.Codable {
+  case WILL_TARGET_LOAD
+  case DID_TARGET_LOAD
+  case WILL_PUBLISH
+  case DID_PUBLISH
+  case CANCEL
+  case ERROR
+  case DID_COMPLETE
+  case LOGIN_COMPLETE
+  case LOGIN_REQUEST
+  case TOKEN_REQUEST
+  case TOKEN_RESPONSE
+  case PARAMS_REQUEST
+  case PARAMS_RESPONSE
+  case EVENT
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public class Message<T> {
+  public init(type: embed_sdk.MessageType, data: T)
+  @objc deinit
+}
+public protocol ActionIntentTypes : Swift.Decodable, Swift.Encodable {
+  var rawValue: Swift.String { get }
+}
+public enum ModuleIntent : Swift.String, embed_sdk.ActionIntentTypes {
+  case EDIT_IMAGE
+  case CREATE_IMAGE_FROM_TEXT
+  case WARMUP
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public typealias ActionIntent = embed_sdk.ActionIntentTypes
+public struct HTTPError : Swift.Error {
+  public var errorReason: Swift.String? {
+    get
+  }
+  public var errorHttpStatusCode: Swift.Int? {
+    get
+  }
+  public var errorRequestURL: Foundation.URL? {
+    get
+  }
+  public var errorRequestBody: Swift.String? {
+    get
+  }
+  public var errorServerResponse: Swift.String? {
+    get
+  }
+  public init(reason: Swift.String?, httpStatusCode: Swift.Int?, requestURL: Foundation.URL?, body: Foundation.Data? = nil, serverResponse: Foundation.Data? = nil)
+}
+public struct PublishParams : Swift.Codable {
+  public var asset: [embed_sdk.OutputAsset]
+  public var exportButtonId: Swift.String
+  public var documentId: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol ContainerConfiguration : Swift.Decodable, Swift.Encodable {
+}
+public class BaseContainerConfig : Swift.Codable {
+  public init(backgroundColor: Swift.String? = nil, showLoader: Swift.Bool? = nil, loadTimeout: Swift.Int? = nil, hideCloseButton: Swift.Bool? = nil, zIndex: Swift.Int? = nil)
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class InlineOrModalContainerConfig : embed_sdk.BaseContainerConfig, embed_sdk.ContainerConfiguration {
+  public init(backgroundColor: Swift.String? = nil, showLoader: Swift.Bool? = nil, loadTimeout: Swift.Int? = nil, hideCloseButton: Swift.Bool? = nil, zIndex: Swift.Int? = nil, size: embed_sdk.PixelSize? = nil, minSize: embed_sdk.PixelSize? = nil, padding: Swift.Int? = nil, borderRadius: Swift.Int? = nil)
+  required public init(from decoder: any Swift.Decoder) throws
+  override public func encode(to encoder: any Swift.Encoder) throws
+  @objc deinit
+}
+@_inheritsConvenienceInitializers public class ModelContainerConfig : embed_sdk.InlineOrModalContainerConfig {
+  override public init(backgroundColor: Swift.String? = nil, showLoader: Swift.Bool? = nil, loadTimeout: Swift.Int? = nil, hideCloseButton: Swift.Bool? = nil, zIndex: Swift.Int? = nil, size: embed_sdk.PixelSize? = nil, minSize: embed_sdk.PixelSize? = nil, padding: Swift.Int? = nil, borderRadius: Swift.Int? = nil)
+  required public init(from decoder: any Swift.Decoder) throws
+  override public func encode(to encoder: any Swift.Encoder) throws
+  @objc deinit
+}
+public typealias ContainerConfig = embed_sdk.ContainerConfiguration
+public enum ExportOptionUI : Swift.String, Swift.Codable {
+  case LINK
+  case BUTTON
+  case ENABLED_BUTTON
+  case DROPDOWN
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public class Style : Swift.Codable {
+  public init(uiType: embed_sdk.ExportOptionUI)
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public enum ExportButtonVariant : Swift.String, Swift.Codable {
+  case ACCENT
+  case PRIMARY
+  case SECONDARY
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum ExportButtonTreatment : Swift.String, Swift.Codable {
+  case FILL
+  case OUTLINE
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class BaseButtonStyle : embed_sdk.Style {
+  public var icon: Swift.String?
+  public var variant: embed_sdk.ExportButtonVariant?
+  public var treatment: embed_sdk.ExportButtonTreatment?
+  override public func encode(to encoder: any Swift.Encoder) throws
+  @objc deinit
+}
+public typealias ButtonStyle = embed_sdk.BaseButtonStyle
+@_hasMissingDesignatedInitializers public class DropdownOptionStyle : embed_sdk.Style {
+  required public init(from decoder: any Swift.Decoder) throws
+  override public func encode(to encoder: any Swift.Encoder) throws
+  @objc deinit
+}
+public protocol ExportTarget : Swift.Decodable, Swift.Encodable {
+  var rawValue: Swift.String { get }
+}
+public enum PublishTarget : Swift.String, embed_sdk.ExportTarget, Swift.Codable {
+  case PUBLISH
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum DownloadTarget : Swift.String, embed_sdk.ExportTarget, Swift.Codable {
+  case DOWNLOAD
+  case DOWNLOAD_ALL
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum EditFurtherTarget : Swift.String, embed_sdk.ExportTarget, Swift.Codable {
+  case EXPRESS
+  case IMAGE_MODULE
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol BaseActions : Swift.Decodable, Swift.Encodable {
+  var target: (any embed_sdk.ExportTarget)? { get }
+}
+public struct PublishAction : embed_sdk.BaseActions, Swift.Codable {
+  public var target: (any embed_sdk.ExportTarget)?
+  public init(target: embed_sdk.PublishTarget, closeTargetOnExport: Swift.Bool? = nil)
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct DownloadAction : embed_sdk.BaseActions, Swift.Codable {
+  public var target: (any embed_sdk.ExportTarget)?
+  public init(target: embed_sdk.DownloadTarget, closeTargetOnExport: Swift.Bool? = nil)
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public enum EditFurtherIntent : Swift.String, Swift.Codable {
+  case ADD_TEXT
+  case ADD_ICONS_AND_SHAPES
+  case ADD_IMAGES
+  case ADD_EFFECTS
+  case REMOVE_BACKGROUND
+  case RESIZE_IMAGE
+  case CROP_IMAGE
+  case APPLY_ADJUSTMENT
+  case GEN_FILL
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum ExportContext : Swift.String, Swift.Codable {
+  case DEFAULT
+  case NEW
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct EditFurtherAction : embed_sdk.BaseActions, Swift.Codable {
+  public var target: (any embed_sdk.ExportTarget)?
+  public init(target: embed_sdk.EditFurtherTarget? = nil, intent: embed_sdk.EditFurtherIntent? = nil, context: embed_sdk.ExportContext? = nil)
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public typealias ContinueEditingAction = embed_sdk.EditFurtherAction
+public typealias ExportAction = embed_sdk.BaseActions
+@_hasMissingDesignatedInitializers public class BaseExportOptionOrGroup : Swift.Codable {
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class BaseExportOption : embed_sdk.BaseExportOptionOrGroup {
+  public var id: Swift.String
+  public var style: embed_sdk.Style
+  public var action: any embed_sdk.BaseActions
+  public init(id: Swift.String, style: embed_sdk.Style, action: any embed_sdk.BaseActions)
+  required public init(from decoder: any Swift.Decoder) throws
+  override public func encode(to encoder: any Swift.Encoder) throws
+  @objc deinit
+}
+public class PublishExportOption : embed_sdk.BaseExportOption {
+  public init(id: Swift.String, style: embed_sdk.Style, action: embed_sdk.PublishAction, label: Swift.String)
+  required public init(from decoder: any Swift.Decoder) throws
+  override public func encode(to encoder: any Swift.Encoder) throws
+  @objc deinit
+}
+public class DownloadExportOption : embed_sdk.BaseExportOption {
+  public init(id: Swift.String, style: embed_sdk.Style, action: embed_sdk.DownloadAction, label: Swift.String)
+  required public init(from decoder: any Swift.Decoder) throws
+  override public func encode(to encoder: any Swift.Encoder) throws
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class ContinueEditingDropdownOption : embed_sdk.BaseExportOption {
+  public var label: Swift.String
+  public init(id: Swift.String, style: embed_sdk.DropdownOptionStyle, action: embed_sdk.ContinueEditingAction, label: Swift.String)
+  override public func encode(to encoder: any Swift.Encoder) throws
+  @objc deinit
+}
+public enum ExportGroupType : Swift.String, Swift.Codable {
+  case BUTTON_GROUP
+  case CONTINUE_EDITING
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class ContinueEditingGroup : embed_sdk.BaseExportOptionOrGroup {
+  public var style: embed_sdk.ButtonStyle
+  public var type: embed_sdk.ExportGroupType
+  public var label: Swift.String
+  public var options: [embed_sdk.ContinueEditingDropdownOption]
+  public init(style: embed_sdk.ButtonStyle, label: Swift.String, options: [embed_sdk.ContinueEditingDropdownOption])
+  required public init(from decoder: any Swift.Decoder) throws
+  override public func encode(to encoder: any Swift.Encoder) throws
+  @objc deinit
+}
+public typealias ExportOptionOrGroup = embed_sdk.BaseExportOptionOrGroup
+public typealias ExportOptions = [embed_sdk.ExportOptionOrGroup]
+public typealias ExportConfig = embed_sdk.ExportOptions
+public enum HTTPMethods : Swift.String {
+  case get
+  case post
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum HostEventType : Swift.String, Swift.Codable {
+  case LOGIN_COMPLETE
+  case INTENT_CHANGED
+  case UPDATE_CLOSE_BUTTON
+  case TEMPLATE_BATCH_LOADED
+  case MEDIA_BATCH_LOADED
+  case ELEMENT_BATCH_LOADED
+  case URL_INFO
+  case EXPORT_INFO
+  case DOWNLOAD_COMPLETE
+  case ASSET_LOAD_STARTED
+  case ASSET_LOADED
+  case ALL_CONTENT_LOADED
+  case DOCUMENT_LOADED_AND_WRITABLE
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct IntentChangedDataContent {
+}
+public struct UpdateCloseButtonDataContent : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct UrlInfoDataContent : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct AssetTargetInfo : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ExportInfoDataContent : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct DownloadCompleteDataContent : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol MessageData {
+}
+public protocol HostEventData : embed_sdk.MessageData {
+  var type: embed_sdk.HostEventType { get }
+  var data: Any? { get set }
+}
+public struct HTTPRequest {
+  public init(url: Foundation.URL, httpMethod: embed_sdk.HTTPMethods, requestBody: Foundation.Data? = nil, query: (any Swift.Encodable)? = nil)
+}
+public struct TextToImageAppConfig : Swift.Codable {
+  public var headerBarColorTheme: embed_sdk.ColorTheme?
+  public var promptText: Swift.String?
+  public var imageDimensions: embed_sdk.ImageDimensions?
+  public var imageStyleReference: embed_sdk.Asset?
+  public var imageCompositionReference: embed_sdk.Asset?
+  public var editorTitle: Swift.String?
+  public var metaData: [Swift.String : Swift.String]?
+  public var createTempDoc: Swift.Bool?
+  public var colorTheme: embed_sdk.ColorTheme?
+  public var spectrumTheme: embed_sdk.SpectrumTheme?
+  public init(headerBarColorTheme: embed_sdk.ColorTheme? = nil, promptText: Swift.String? = nil, imageDimensions: embed_sdk.ImageDimensions? = nil, imageStyleReference: embed_sdk.Asset? = nil, imageCompositionReference: embed_sdk.Asset? = nil, editorTitle: Swift.String? = nil, metaData: [Swift.String : Swift.String]? = nil, createTempDoc: Swift.Bool? = nil, callbacks: any embed_sdk.Callbacks, colorTheme: embed_sdk.ColorTheme? = nil, spectrumTheme: embed_sdk.SpectrumTheme? = nil)
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+@_inheritsConvenienceInitializers public class ModuleWorkflow : embed_sdk.BaseWorkflow, embed_sdk.ModuleWorkflowInterface {
+  override public init(actionManager: embed_sdk.ActionManager, context: embed_sdk.SDKContext)
+  public func createImageFromText(appConfig: embed_sdk.TextToImageAppConfig, exportConfig: embed_sdk.ExportConfig, containerConfig: any embed_sdk.ContainerConfiguration, view: UIKit.UIView) throws
+  @objc deinit
+}
+public struct IntentChangeConfig {
+}
+public protocol Callbacks {
+  func onLoadStart()
+  func onLoad()
+  func onCancel()
+  func onPublishStart()
+  func onPublish(intent: any embed_sdk.ActionIntentTypes, publishParams: embed_sdk.PublishParams)
+  func onError(error: embed_sdk.CCEverywhereError)
+  func onEvent(message: any embed_sdk.HostEventData)
+  func onIntentChange(oldIntent: any embed_sdk.ActionIntentTypes, newIntent: any embed_sdk.ActionIntentTypes) -> embed_sdk.IntentChangeConfig?
+}
+@_hasMissingDesignatedInitializers public class HttpUtility {
+  public static let instance: embed_sdk.HttpUtility
+  public func APIRequest<T>(httpRequest: embed_sdk.HTTPRequest, resultType: T.Type, completionHandler: @escaping (Swift.Result<T?, embed_sdk.HTTPError>) -> Swift.Void) where T : Swift.Decodable
+  @objc deinit
+}
+extension Swift.Encodable {
+  public func convertToURLQueryItems() -> [Foundation.URLQueryItem]?
+}
+public enum ErrorCodes : Swift.String {
+  case SDK_ALREADY_INITIALIZED
+  case SDK_INITIALIZATION_IN_PROGRESS
+  case SDK_NOT_INITIALIZED
+  case HOST_APP_CONTEXT_NOT_PASSED
+  case SDK_INITIALIZATION_FAILED
+  case AUTHORIZATION_DETAILS_NOT_FOUND
+  case WORKFLOW_ALREADY_IN_PROGRESS
+  case ACTION_LAUNCH_ERROR
+  case SDK_INTERNAL_ERROR
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum ErrorMessages : Swift.String, Swift.CaseIterable {
+  case SDK_ALREADY_INITIALIZED
+  case SDK_INITIALIZATION_IN_PROGRESS
+  case SDK_NOT_INITIALIZED
+  case HOST_APP_CONTEXT_NOT_PASSED
+  case SDK_INITIALIZATION_FAILED
+  case AUTHORIZATION_DETAILS_NOT_FOUND
+  case WORKFLOW_ALREADY_IN_PROGRESS
+  case ACTION_LAUNCH_ERROR
+  case SDK_INTERNAL_ERROR
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [embed_sdk.ErrorMessages]
+  public typealias RawValue = Swift.String
+  nonisolated public static var allCases: [embed_sdk.ErrorMessages] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct ErrorCodeMessages {
+  public init(errorCode: embed_sdk.ErrorCodes)
+}
+extension embed_sdk.State : Swift.Equatable {}
+extension embed_sdk.State : Swift.Hashable {}
+extension embed_sdk.Environment : Swift.Equatable {}
+extension embed_sdk.Environment : Swift.Hashable {}
+extension embed_sdk.Environment : Swift.RawRepresentable {}
+extension embed_sdk.ColorTheme : Swift.Equatable {}
+extension embed_sdk.ColorTheme : Swift.Hashable {}
+extension embed_sdk.ColorTheme : Swift.RawRepresentable {}
+extension embed_sdk.SpectrumTheme : Swift.Equatable {}
+extension embed_sdk.SpectrumTheme : Swift.Hashable {}
+extension embed_sdk.SpectrumTheme : Swift.RawRepresentable {}
+extension embed_sdk.ImageFileType : Swift.Equatable {}
+extension embed_sdk.ImageFileType : Swift.Hashable {}
+extension embed_sdk.ImageFileType : Swift.RawRepresentable {}
+extension embed_sdk.VideoFileType : Swift.Equatable {}
+extension embed_sdk.VideoFileType : Swift.Hashable {}
+extension embed_sdk.VideoFileType : Swift.RawRepresentable {}
+extension embed_sdk.PdfFileType : Swift.Equatable {}
+extension embed_sdk.PdfFileType : Swift.Hashable {}
+extension embed_sdk.PdfFileType : Swift.RawRepresentable {}
+extension embed_sdk.SizeUnit : Swift.Equatable {}
+extension embed_sdk.SizeUnit : Swift.Hashable {}
+extension embed_sdk.SizeUnit : Swift.RawRepresentable {}
+extension embed_sdk.AssetType : Swift.Equatable {}
+extension embed_sdk.AssetType : Swift.Hashable {}
+extension embed_sdk.AssetType : Swift.RawRepresentable {}
+extension embed_sdk.AssetDataType : Swift.Equatable {}
+extension embed_sdk.AssetDataType : Swift.Hashable {}
+extension embed_sdk.AssetDataType : Swift.RawRepresentable {}
+extension embed_sdk.AspectRatio : Swift.Equatable {}
+extension embed_sdk.AspectRatio : Swift.Hashable {}
+extension embed_sdk.AspectRatio : Swift.RawRepresentable {}
+extension embed_sdk.HostId : Swift.Equatable {}
+extension embed_sdk.HostId : Swift.Hashable {}
+extension embed_sdk.HostId : Swift.RawRepresentable {}
+extension embed_sdk.HostType : Swift.Equatable {}
+extension embed_sdk.HostType : Swift.Hashable {}
+extension embed_sdk.HostType : Swift.RawRepresentable {}
+extension embed_sdk.PlatformCategory : Swift.Hashable {}
+extension embed_sdk.PlatformCategory : Swift.RawRepresentable {}
+extension embed_sdk.MessageType : Swift.Equatable {}
+extension embed_sdk.MessageType : Swift.Hashable {}
+extension embed_sdk.MessageType : Swift.RawRepresentable {}
+extension embed_sdk.ModuleIntent : Swift.Equatable {}
+extension embed_sdk.ModuleIntent : Swift.Hashable {}
+extension embed_sdk.ModuleIntent : Swift.RawRepresentable {}
+extension embed_sdk.ExportOptionUI : Swift.Equatable {}
+extension embed_sdk.ExportOptionUI : Swift.Hashable {}
+extension embed_sdk.ExportOptionUI : Swift.RawRepresentable {}
+extension embed_sdk.ExportButtonVariant : Swift.Equatable {}
+extension embed_sdk.ExportButtonVariant : Swift.Hashable {}
+extension embed_sdk.ExportButtonVariant : Swift.RawRepresentable {}
+extension embed_sdk.ExportButtonTreatment : Swift.Equatable {}
+extension embed_sdk.ExportButtonTreatment : Swift.Hashable {}
+extension embed_sdk.ExportButtonTreatment : Swift.RawRepresentable {}
+extension embed_sdk.PublishTarget : Swift.Equatable {}
+extension embed_sdk.PublishTarget : Swift.Hashable {}
+extension embed_sdk.PublishTarget : Swift.RawRepresentable {}
+extension embed_sdk.DownloadTarget : Swift.Equatable {}
+extension embed_sdk.DownloadTarget : Swift.Hashable {}
+extension embed_sdk.DownloadTarget : Swift.RawRepresentable {}
+extension embed_sdk.EditFurtherTarget : Swift.Equatable {}
+extension embed_sdk.EditFurtherTarget : Swift.Hashable {}
+extension embed_sdk.EditFurtherTarget : Swift.RawRepresentable {}
+extension embed_sdk.EditFurtherIntent : Swift.Equatable {}
+extension embed_sdk.EditFurtherIntent : Swift.Hashable {}
+extension embed_sdk.EditFurtherIntent : Swift.RawRepresentable {}
+extension embed_sdk.ExportContext : Swift.Equatable {}
+extension embed_sdk.ExportContext : Swift.Hashable {}
+extension embed_sdk.ExportContext : Swift.RawRepresentable {}
+extension embed_sdk.ExportGroupType : Swift.Equatable {}
+extension embed_sdk.ExportGroupType : Swift.Hashable {}
+extension embed_sdk.ExportGroupType : Swift.RawRepresentable {}
+extension embed_sdk.HTTPMethods : Swift.Equatable {}
+extension embed_sdk.HTTPMethods : Swift.Hashable {}
+extension embed_sdk.HTTPMethods : Swift.RawRepresentable {}
+extension embed_sdk.HostEventType : Swift.Equatable {}
+extension embed_sdk.HostEventType : Swift.Hashable {}
+extension embed_sdk.HostEventType : Swift.RawRepresentable {}
+extension embed_sdk.ErrorCodes : Swift.Equatable {}
+extension embed_sdk.ErrorCodes : Swift.Hashable {}
+extension embed_sdk.ErrorCodes : Swift.RawRepresentable {}
+extension embed_sdk.ErrorMessages : Swift.Equatable {}
+extension embed_sdk.ErrorMessages : Swift.Hashable {}
+extension embed_sdk.ErrorMessages : Swift.RawRepresentable {}

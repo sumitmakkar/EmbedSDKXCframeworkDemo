@@ -1,0 +1,8 @@
+{
+  "version": "SDK_VERSION_PLACEHOLDER",
+  "base": {
+    "EDITOR": "https://stage-daily.projectx.corp.adobe.com",
+    "QUICK_ACTION": "https://quick-actions-stage.projectx.corp.adobe.com",
+    "FIREFLY": "https://firefly-stage.corp.adobe.com"
+  }
+}
